@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salon Earnings</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+
+    <header class="top">
+      <h1>Salon Earnings</h1>
+      <!-- Week navigation: shows which week the totals belong to -->
+      <div class="week-nav">
+        <button id="prevWeek" class="btn-icon" aria-label="Previous week">‹</button>
+        <span id="weekLabel">This week</span>
+        <button id="nextWeek" class="btn-icon" aria-label="Next week">›</button>
+      </div>
+    </header>
+
+    <!-- TOTALS PANEL -->
+    <section class="totals" aria-label="Weekly totals">
+      <div class="card total">
+        <span class="total-label">Monday to Friday</span>
+        <span class="total-value" id="totalFri">0</span>
+      </div>
+      <div class="card total">
+        <span class="total-label">Monday to Saturday</span>
+        <span class="total-value" id="totalSat">0</span>
+      </div>
+      <div class="card total total-main">
+        <span class="total-label">Whole week (Mon–Sun)</span>
+        <span class="total-value" id="totalSun">0</span>
+      </div>
+    </section>
+
+    <!-- INPUT FORM -->
+    <section class="card">
+      <h2 id="formTitle">Add earnings</h2>
+      <div class="field">
+        <label for="dateInput">Date</label>
+        <input type="date" id="dateInput" />
+      </div>
+      <div class="field">
+        <label for="amountInput">Amount</label>
+        <input type="number" id="amountInput" inputmode="decimal" min="0" step="any" placeholder="0" />
+      </div>
+      <div class="actions">
+        <button id="saveBtn" class="btn btn-primary">Add</button>
+        <button id="deleteBtn" class="btn btn-danger" hidden>Delete</button>
+      </div>
+      <p id="message" class="message" role="status"></p>
+    </section>
+
+    <!-- LIST OF THIS WEEK'S ENTRIES -->
+    <section class="card">
+      <h2>Entries this week</h2>
+      <ul id="entryList" class="list"></ul>
+      <p id="emptyEntries" class="empty">Nothing added yet. Pick a date and enter an amount.</p>
+    </section>
+
+    <!-- EXPORT -->
+    <section class="card">
+      <h2>Download</h2>
+      <div class="field">
+        <label for="exportType">What to download</label>
+        <select id="exportType">
+          <option value="week">The week I'm viewing</option>
+          <option value="month">A whole month</option>
+        </select>
+      </div>
+      <div class="field" id="monthField" hidden>
+        <label for="monthInput">Month</label>
+        <input type="month" id="monthInput" />
+      </div>
+      <div class="actions">
+        <button id="csvBtn" class="btn btn-primary">Download CSV</button>
+        <button id="xlsxBtn" class="btn btn-primary">Download Excel</button>
+      </div>
+    </section>
+
+    <!-- HISTORY (all weeks, newest first, with stock) -->
+    <section class="card">
+      <h2>History</h2>
+      <div id="historyList"></div>
+      <p id="emptyHistory" class="empty">No weeks saved yet.</p>
+    </section>
+
+    <!-- SUNDAY STOCK (only shown on Sundays) -->
+    <section class="card" id="stockSection" hidden>
+      <h2>Stock to buy</h2>
+      <div class="stock-row">
+        <input type="text" id="stockInput" placeholder="Item name" autocomplete="off" />
+        <button id="stockAddBtn" class="btn btn-primary">Add item</button>
+      </div>
+      <ul id="stockList" class="list"></ul>
+      <p id="emptyStock" class="empty">No items yet.</p>
+    </section>
+
+  </main>
+
+  <!-- SheetJS: builds real .xlsx files in the browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
